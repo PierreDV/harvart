@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SC from 'node-soundcloud';
+import SearchBar from './components/search_bar';
+import ImageGrid from './components/image_grid';
 
 const API_KEY = '81c02e10-19a3-11e9-a436-ede6838aae81';
 // https://github.com/harvardartmuseums/api-docs
-const URL = `https://api.harvardartmuseums.org/person?apikey=${API_KEY}`;
+const URL = `https://api.harvardartmuseums.org/image?apikey=${API_KEY}`;
 
 class App extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  imageSearch() {
     fetch(URL)
       .then(res => res.json())
       .then(
@@ -36,6 +37,10 @@ class App extends React.Component {
       )
   }
 
+  componentDidMount() {
+    this.imageSearch();
+  }
+
   render() {
     const { error, isLoaded, result } = this.state;
     if (error) {
@@ -43,9 +48,8 @@ class App extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return (
-        <div>Worked</div>
-      )
+      return <ImageGrid images={result.records} />
+        // <img src={result.records[0].baseimageurl} alt="First API request result" ></img>
     }
   };
 }
