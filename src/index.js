@@ -23,8 +23,8 @@ class App extends React.Component {
         (result) => {
           console.log(result);
           this.setState({
-              isLoaded: true,
-              result: result
+            isLoaded: true,
+            result: result
           });
         },
         (error) => {
