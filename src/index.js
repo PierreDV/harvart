@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SearchBar from './components/search_bar';
 import ImageGrid from './components/image_grid';
+import './styles/style.scss'
 
 const API_KEY = '81c02e10-19a3-11e9-a436-ede6838aae81';
 // https://github.com/harvardartmuseums/api-docs
@@ -37,6 +38,16 @@ class App extends React.Component {
       )
   }
 
+  serialize(obj) {
+    const str = [];
+    for (var p in obj) {
+      if (obj.hasOwnProperty(p)) {
+        str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
+      }
+      return str.join("&");
+    }
+  }
+
   componentDidMount() {
     this.imageSearch();
   }
@@ -48,8 +59,12 @@ class App extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return <ImageGrid images={result.records} />
-        // <img src={result.records[0].baseimageurl} alt="First API request result" ></img>
+      return (
+        <div>
+          <SearchBar />
+          <ImageGrid images={result.records} />
+        </div>
+      )
     }
   };
 }

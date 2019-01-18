@@ -1,7 +1,9 @@
 import React from 'react';
 
 const ImageGridItem = (props) => {
-  return <li><img src={props.image_url} alt="First API request result" ></img></li>
+  return (
+    <img src={props.image_url} alt="First API request result" ></img>
+  )
 };
 
 export default ImageGridItem;

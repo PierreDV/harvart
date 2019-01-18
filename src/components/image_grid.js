@@ -6,9 +6,9 @@ const ImageGrid = (props) => {
     return <ImageGridItem image_url={image.baseimageurl} key={image.id}/>
   });
   return(
-    <ul>
+    <section className="image-grid">
       {imageItems}
-    </ul>
+    </section>
   )
 }
 
