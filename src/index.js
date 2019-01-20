@@ -6,7 +6,7 @@ import './styles/style.scss'
 
 const API_KEY = '81c02e10-19a3-11e9-a436-ede6838aae81';
 // https://github.com/harvardartmuseums/api-docs
-const URL = `https://api.harvardartmuseums.org/image?apikey=${API_KEY}`;
+
 
 class App extends React.Component {
   constructor(props) {
@@ -16,18 +16,28 @@ class App extends React.Component {
       isLoaded: false,
       items: []
     };
+    this.imageSearch = this.imageSearch.bind(this);
   }
 
-  imageSearch() {
-    fetch(URL)
+  imageSearch(term) {
+    const PERSON_URL = `https://api.harvardartmuseums.org/person?apikey=${API_KEY}&q=displayname:${term}&size=1`;
+    fetch(PERSON_URL)
       .then(res => res.json())
       .then(
         (result) => {
+          const OBJECT_URL = `https://api.harvardartmuseums.org/object?apikey=${API_KEY}&person=${result.records[0].id}`;
           console.log(result);
-          this.setState({
-            isLoaded: true,
-            result: result
-          });
+          return fetch(OBJECT_URL)
+            .then(res => res.json())
+            .then(
+              (result) => {
+                console.log(result);
+                this.setState({
+                  isLoaded: true,
+                  result: result
+                });
+              }
+            )
         },
         (error) => {
           this.setState({
@@ -38,18 +48,18 @@ class App extends React.Component {
       )
   }
 
-  serialize(obj) {
-    const str = [];
-    for (var p in obj) {
-      if (obj.hasOwnProperty(p)) {
-        str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
-      }
-      return str.join("&");
-    }
-  }
+  // serialize(obj) {
+  //   const str = [];
+  //   for (var p in obj) {
+  //     if (obj.hasOwnProperty(p)) {
+  //       str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
+  //     }
+  //     return str.join("&");
+  //   }
+  // }
 
   componentDidMount() {
-    this.imageSearch();
+    this.imageSearch('Titian');
   }
 
   render() {
@@ -61,8 +71,8 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <SearchBar />
-          <ImageGrid images={result.records} />
+          <SearchBar onSubmit={this.imageSearch}/>
+          <ImageGrid records={result.records} />
         </div>
       )
     }
