@@ -6,8 +6,7 @@ import './styles/style.scss'
 
 const API_KEY = '81c02e10-19a3-11e9-a436-ede6838aae81';
 // https://github.com/harvardartmuseums/api-docs
-
-
+const BASE_URL = 'https://api.harvardartmuseums.org/'
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,21 +19,28 @@ class App extends React.Component {
   }
 
   imageSearch(term) {
-    const PERSON_URL = `https://api.harvardartmuseums.org/person?apikey=${API_KEY}&q=displayname:${term}&size=1`;
-    fetch(PERSON_URL)
+    const PLACE_URL = `${BASE_URL}place?apikey=${API_KEY}&q=name:${term}&size=1`;
+    fetch(PLACE_URL)
       .then(res => res.json())
       .then(
-        (result) => {
-          const OBJECT_URL = `https://api.harvardartmuseums.org/object?apikey=${API_KEY}&person=${result.records[0].id}`;
-          console.log(result);
+        (res) => {
+          console.log(res);
+          const OBJECT_URL =
+            `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0`
           return fetch(OBJECT_URL)
             .then(res => res.json())
             .then(
-              (result) => {
-                console.log(result);
+              (res) => {
+                console.log(res)
                 this.setState({
                   isLoaded: true,
-                  result: result
+                  result: res
+                });
+              },
+              (error) => {
+                this.setState({
+                  isLoaded: true,
+                  error
                 });
               }
             )
@@ -59,7 +65,7 @@ class App extends React.Component {
   // }
 
   componentDidMount() {
-    this.imageSearch('Titian');
+    this.imageSearch('Amsterdam');
   }
 
   render() {
