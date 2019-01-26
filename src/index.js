@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import configureStore from './store';
+
 import SearchBar from './components/search_bar';
 import ImageGrid from './components/image_grid';
 import './styles/style.scss'
@@ -86,6 +89,8 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-  <App />,
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
