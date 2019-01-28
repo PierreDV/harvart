@@ -5,7 +5,7 @@ const BASE_URL = 'https://api.harvardartmuseums.org/'
 export const FETCH_IMAGES = 'FETCH_IMAGES';
 
 export function fetchImagesAsync(place){
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const PLACE_URL = `${BASE_URL}place?apikey=${API_KEY}&q=name:${place}&size=1`;
     fetch(PLACE_URL)
       .then(res => res.json())

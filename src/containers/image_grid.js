@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import ImageGridItem from '../components/image_grid_item';
 
 class ImageGrid extends Component {
-  renderImage(imageRecords) {
-    return(
-      <ImageGridItem image_url={imageRecords[0]["images"][0]["baseimageurl"]} />
-    )
-  }
+
   render() {
-    console.log(this.props.images)
     return(
-      <div>{this.props.images.map(this.renderImage)}</div>
+      <div>{
+        this.props.images.map(image => {
+          return(
+            <ImageGridItem
+              image_url={image.images[0].baseimageurl}
+              key={image.id}/>
+          )
+        })
+      }</div>
     )
   }
 }
