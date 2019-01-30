@@ -7,7 +7,7 @@ class ImageGrid extends Component {
   render() {
     return(
       <div>{
-        this.props.images.map(image => {
+        this.props.images.items.map(image => {
           return(
             <ImageGridItem
               image_url={image.images[0].baseimageurl}
