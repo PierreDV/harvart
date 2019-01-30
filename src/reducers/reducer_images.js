@@ -1,4 +1,4 @@
-import { FETCH_IMAGES } from '../actions/index';
+import { FETCH_IMAGES_SUCCESS, FETCH_IMAGES_REQUEST } from '../actions/index';
 
 const INITIAL_STATE = {
 	items: [],
@@ -8,7 +8,12 @@ const INITIAL_STATE = {
 
 export default function(state = INITIAL_STATE, action) {
 	switch (action.type) {
-	case FETCH_IMAGES:
+	case FETCH_IMAGES_REQUEST:
+		return {
+			...state,
+			isFetching: true,
+		}
+	case FETCH_IMAGES_SUCCESS:
 		return {
 			...state,
 			isFetching: false,

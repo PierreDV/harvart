@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import ImageGridItem from '../components/image_grid_item';
 
 class ImageGrid extends Component {
-
   render() {
     return(
-      <div>{
+      <div>{ this.props.images.isFetching ? <div>Loading...</div> :
         this.props.images.items.map(image => {
           return(
             <ImageGridItem
