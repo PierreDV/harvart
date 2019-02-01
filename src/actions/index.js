@@ -16,11 +16,15 @@ export function fetchImagesAsync(place){
         if (!res.records.length) {
           return dispatch(fetchImagesFailure("Could not locate images from entered place"));
         }
-        const OBJECT_URL = `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0`
+        const OBJECT_URL = 
+          `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0`
         return fetch(OBJECT_URL)
-          .then(result => result.json())
-          .then((result) => {
-            dispatch(fetchImagesSuccess(result))
+          .then(res => res.json())
+          .then((res) => {
+            if(!res.records.images) {
+              return dispatch(fetchImagesFailure("No images were found for entered location"));
+            }
+            dispatch(fetchImagesSuccess(res))
   				})
       })
   }

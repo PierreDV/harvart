@@ -4,28 +4,31 @@ import ImageGridItem from '../components/image_grid_item';
 
 class ImageGrid extends Component {
   render() {
-    if(this.props.images.error){
-      return <div>{this.props.images.error}</div>
-    } else if(this.props.images.isFetching){
-      return <div>Loading...</div>
-    }
+    const records = this.props.records;
+
+    if(records.error){
+      return <div>{records.error}</div>;
+    } else if(records.isFetching) {
+      return <div>Loading...</div>;
+    };
 
     return(
       <div className='image-grid'>
-        {this.props.images.items.map(image => {
+        {records.items.map(record => {
           return(
             <ImageGridItem
-              image_url={image.images[0].baseimageurl}
-              key={image.id}
-            />)
+              image_url={record.images[0].baseimageurl}
+              key={record.id}
+            />
+          );
         })}
       </div>
     )   
   }
 }
 
-function mapStateToProps({ images }) {
-  return { images };
+function mapStateToProps({ records }) {
+  return { records };
 }
 
 export default connect(mapStateToProps)(ImageGrid);
