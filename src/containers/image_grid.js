@@ -15,12 +15,14 @@ class ImageGrid extends Component {
     return(
       <div className='image-grid'>
         {records.items.map(record => {
-          return(
-            <ImageGridItem
-              image_url={record.images[0].baseimageurl}
-              key={record.id}
-            />
-          );
+          if(record.images) {
+            return(
+              <ImageGridItem
+                image_url={record.images[0].baseimageurl}
+                key={record.id}
+              />
+            );
+          }
         })}
       </div>
     )   
