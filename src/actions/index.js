@@ -13,6 +13,9 @@ export function fetchImagesAsync(place){
     fetch(PLACE_URL)
       .then(res => res.json())
       .then((res) => {
+        if (!res.records.length) {
+          return dispatch(fetchImagesFailure("Could not locate images from entered place"));
+        }
         const OBJECT_URL = `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0`
         return fetch(OBJECT_URL)
           .then(result => result.json())
@@ -34,4 +37,11 @@ function fetchImagesRequest() {
   return {
     type: FETCH_IMAGES_REQUEST,
   };
+}
+
+function fetchImagesFailure(error) {
+  return {
+    type: FETCH_IMAGES_FAILURE,
+    error
+  }
 }
