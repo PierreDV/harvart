@@ -11,7 +11,7 @@ class ImageGrid extends Component {
     } else if(records.isFetching) {
       return <div>Loading...</div>;
     };
-
+    console.log(records.items)
     return(
       <div className='row image-grid'>
         {records.items.map(record => {
@@ -19,6 +19,7 @@ class ImageGrid extends Component {
             return(
               <ImageGridItem
                 image_url={record.images[0].baseimageurl}
+                description={record.title}
                 key={record.id}
               />
             );

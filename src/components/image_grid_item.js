@@ -5,7 +5,7 @@ const ImageGridItem = (props) => {
     <div className="card">
       <img src={props.image_url} alt="First API request result" ></img>
       <div className="card-body">
-        <h5 className="card-title">Card Title</h5>
+        <h5 className="card-title">{props.description}</h5>
       </div>
     </div>
     
