@@ -2,7 +2,7 @@
   "name": "sound_clout",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://pierredv.github.io/harvart",
+  "homepage": "http://PierreDV.github.io/harvart",
   "dependencies": {
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
