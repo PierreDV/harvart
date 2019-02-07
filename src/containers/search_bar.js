@@ -23,6 +23,10 @@ class SearchBar extends React.Component {
     this.setState({term: event.target.value });
   }
 
+  componentDidMount() {
+    this.props.fetchImagesAsync('Amsterdam');
+  }
+
   render() {
     return(
       <form onSubmit={this.onFormSubmit}>
