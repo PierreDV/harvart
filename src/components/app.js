@@ -7,6 +7,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <h1>Harv-Art</h1>
+        <p>Search the Harvard Art Gallery's collection of paintings, photos and documents!</p>
         <SearchBar />
         <ImageGrid />
       </div>
