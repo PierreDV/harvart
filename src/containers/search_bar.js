@@ -28,6 +28,7 @@ class SearchBar extends React.Component {
       <form onSubmit={this.onFormSubmit}>
         <button type="submit">Search</button>
         <input
+          placeholder="Enter a place i.e. Amsterdam, Canada"
           value={this.state.term}
           onChange={this.onInputChange}
         />
