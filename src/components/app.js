@@ -7,11 +7,21 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Harv-Art</h1>
-        <p>Search the Harvard Art Gallery's collection of paintings, photos and documents!</p>
-        <SearchBar />
+        <div className="jumbotron text-center">
+          <div className="container">
+            <div className="jumbotron-heading">
+              <h1>Harv-Art</h1>
+            </div>
+          
+            <p className="lead text-muted">Search the Harvard Art Gallery's collection of paintings, photos and documents!</p>
+            <SearchBar />
+          </div>
+          
+        </div>
         <ImageGrid />
       </div>
+
+
     )
   };
 }

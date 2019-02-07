@@ -13,7 +13,7 @@ class ImageGrid extends Component {
     };
 
     return(
-      <div className='image-grid'>
+      <div className='row'>
         {records.items.map(record => {
           if(record.images) {
             return(
