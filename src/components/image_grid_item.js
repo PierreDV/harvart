@@ -16,16 +16,17 @@ class ImageGridItem extends Component {
 
   render() {
     return (
-      <div>
-        <div className={`card ${this.state.imageStatus}`}>
+      <div className="col-sm">
+        <div className={`card`}>
           <img 
+            className="card-img-top"
             src={this.props.image_url} 
             alt="First API request result" 
             onLoad={this.handleImageLoaded.bind(this)}
             onError={this.handleImageError.bind(this)}
           />
           <div className="card-body">
-            <h5 className="card-title">{this.props.description}</h5>
+            <h5 className="card-text">{this.props.description}</h5>
           </div>
         </div>
       </div>

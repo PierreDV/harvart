@@ -6,10 +6,12 @@ export const FETCH_IMAGES_REQUEST = 'FETCH_IMAGES_REQUEST';
 export const FETCH_IMAGES_SUCCESS = 'FETCH_IMAGES_SUCCESS';
 export const FETCH_IMAGES_FAILURE = 'FETCH_IMAGES_FAILURE';
 
+export const SHOW_MODAL = 'SHOW_MODAL';
+
 export function fetchImagesAsync(place){
   return (dispatch) => {
     dispatch(fetchImagesRequest());
-    const PLACE_URL = `${BASE_URL}place?apikey=${API_KEY}&q=name:${place}&size=1`;
+    const PLACE_URL = `${BASE_URL}place?apikey=${API_KEY}&q=name:${place}`;
     fetch(PLACE_URL)
       .then(res => res.json())
       .then((res) => {
@@ -17,10 +19,11 @@ export function fetchImagesAsync(place){
           return dispatch(fetchImagesFailure("Could not locate images from entered place"));
         }
         const OBJECT_URL = 
-          `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0`
+          `${BASE_URL}object?apikey=${API_KEY}&place=${res.records[0].id}&q=people.role:Artist AND imagepermissionlevel:0&size=30`
         return fetch(OBJECT_URL)
           .then(res => res.json())
           .then((res) => {
+            console.log(res)
             // if(!res.records[0].images.length) {
             //   return dispatch(fetchImagesFailure("No images were found for entered location"));
             // }
@@ -47,5 +50,12 @@ function fetchImagesFailure(error) {
   return {
     type: FETCH_IMAGES_FAILURE,
     error
+  }
+}
+
+export function showModal(image) {
+  return {
+    type: SHOW_MODAL,
+    image
   }
 }

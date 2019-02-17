@@ -12,7 +12,7 @@ class ImageGrid extends Component {
       return <div className='spinner'></div>;
     };
     return(
-      <div className='row image-grid'>
+      <div className='row justify-content-center'>
         {records.items.map(record => {
           if(record.images) {
             return(
