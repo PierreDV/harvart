@@ -1,4 +1,8 @@
-import { FETCH_IMAGES_SUCCESS, FETCH_IMAGES_REQUEST, FETCH_IMAGES_FAILURE } from '../actions/index';
+import { 
+	FETCH_IMAGES_SUCCESS, 
+	FETCH_IMAGES_REQUEST, 
+	FETCH_IMAGES_FAILURE 
+} from '../actions/index';
 
 const INITIAL_STATE = {
 	items: [],
