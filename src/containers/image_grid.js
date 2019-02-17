@@ -9,9 +9,8 @@ class ImageGrid extends Component {
     if(records.error){
       return <div>{records.error}</div>;
     } else if(records.isFetching) {
-      return <div>Loading...</div>;
+      return <div className='spinner'></div>;
     };
-    console.log(records.items)
     return(
       <div className='row image-grid'>
         {records.items.map(record => {
