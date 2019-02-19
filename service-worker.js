@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/harvart/precache-manifest.ddef1d9774bdbc61cd97d52cc24099d9.js"
+  "/harvart/precache-manifest.a12229f3940f79dc72b497d3b8fca0b2.js"
 );
 
 workbox.clientsClaim();
